@@ -24,11 +24,13 @@ export class BookmarksService {
     const post = await this.postsRepository.findOne({ where: { postId } });
     const user = await this.usersRepository.findOne({ where: { userId } });
 
-    return this.bookmarksRepository.create({
+    const bookmark = this.bookmarksRepository.create({
       bookmark: true,
       user,
       posts: [post],
     });
+
+    return await this.bookmarksRepository.save(bookmark);
   }
 
   async removeBookmark(postId: number, req: any) {

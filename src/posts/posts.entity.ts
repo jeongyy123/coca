@@ -22,7 +22,16 @@ export class Post {
   title: string;
 
   @Column()
+  author: string;
+
+  @Column()
   content: string;
+
+  @Column()
+  quantity: number;
+
+  @Column()
+  amount: number;
 
   @CreateDateColumn()
   createdAt: Date;

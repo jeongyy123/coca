@@ -1,7 +1,7 @@
 import { Body, Controller, Param, Post, Req } from '@nestjs/common';
 import { OrdersService } from './orders.service';
-import { OrderType } from './ordertype.enum';
 import { Request } from 'express';
+import { CreateOrderDto } from './dto/create-order.dto';
 
 @Controller('/posts/:postId/orders')
 export class OrdersController {
@@ -11,9 +11,9 @@ export class OrdersController {
   async addOrder(
     @Param('postId') postId: number,
     @Req() req: Request,
-    @Body() quantity: number,
-    @Body() orderType: OrderType,
+    @Body() data: CreateOrderDto,
   ) {
-    return this.ordersService.addOrder(postId, quantity, orderType, req);
+    return this.ordersService.addOrder(postId, req, data.quantity, data.amount);
   }
 }
+=

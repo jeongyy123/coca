@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { PostsRepository } from 'src/posts/posts.repository';
 import { CommentsRepository } from './comments.repository';
 import { Post } from 'src/posts/posts.entity';
-import { Comment } from './commnets.entity';
+import { Comment } from './comments.entity';
 
 @Injectable()
 export class CommentsService {
@@ -12,7 +12,7 @@ export class CommentsService {
     @InjectRepository(Post)
     private readonly commentsRepository: CommentsRepository,
     private readonly postsRepository: PostsRepository,
-  ) {}
+  ) { }
 
   async getComments(postId: number) {
     await this.findPostById(postId);
