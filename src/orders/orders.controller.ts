@@ -5,7 +5,7 @@ import { CreateOrderDto } from './dto/create-order.dto';
 
 @Controller('/posts/:postId/orders')
 export class OrdersController {
-  constructor(private readonly ordersService: OrdersService) { }
+  constructor(private readonly ordersService: OrdersService) {}
 
   @Post()
   async addOrder(
@@ -16,4 +16,3 @@ export class OrdersController {
     return this.ordersService.addOrder(postId, req, data.quantity, data.amount);
   }
 }
-=

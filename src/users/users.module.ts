@@ -19,4 +19,4 @@ import { JwtConfigService } from 'src/configs/jwt.config.service';
   controllers: [UsersController],
   providers: [UsersService],
 })
-export class UsersModule { }
+export class UsersModule {}

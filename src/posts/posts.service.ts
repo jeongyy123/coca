@@ -12,7 +12,7 @@ export class PostsService {
     private readonly postsRepository: PostsRepository,
     @InjectRepository(User)
     private readonly usersRepository: UsersRepository,
-  ) { }
+  ) {}
 
   async getPosts() {
     return this.postsRepository.find();

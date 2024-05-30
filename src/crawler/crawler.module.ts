@@ -1,24 +1,23 @@
 import { Module } from '@nestjs/common';
-import { OrdersController } from './orders.controller';
-import { OrdersService } from './orders.service';
-import { Order } from './orders.entity';
+import { CrawlerController } from './crawler.controller';
+import { CrawlerService } from './crawler.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Machine } from 'src/products/machines.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtConfigService } from 'src/configs/jwt.config.service';
-import { User } from 'src/users/users.entity';
-import { Post } from 'src/posts/posts.entity';
+import { MachinesRepository } from 'src/products/machines.repository';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Order, Post, User]),
+    TypeOrmModule.forFeature([Machine]),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useClass: JwtConfigService,
       inject: [ConfigService],
     }),
   ],
-  controllers: [OrdersController],
-  providers: [OrdersService],
+  controllers: [CrawlerController],
+  providers: [CrawlerService, MachinesRepository],
 })
-export class OrdersModule {}
+export class CrawlerModule {}

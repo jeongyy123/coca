@@ -14,7 +14,7 @@ import { CreatePostDto } from './dto/create-post.dto';
 
 @Controller('posts')
 export class PostsController {
-  constructor(private readonly postsService: PostsService) { }
+  constructor(private readonly postsService: PostsService) {}
 
   @Get()
   async getPosts() {
