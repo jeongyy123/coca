@@ -6,15 +6,13 @@ import { CrawlerModule } from './crawler/crawler.module';
 import { OrdersModule } from './orders/orders.module';
 import { UsersModule } from './users/users.module';
 import { BookmarksModule } from './bookmarks/bookmarks.module';
-// import { CommentsModule } from './comments/comments.module';
-import { CrawlerController } from './crawler/crawler.controller';
-import { CrawlerService } from './crawler/crawler.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmConfigService } from './configs/typeorm.config.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtConfigService } from './configs/jwt.config.service';
 import { ProductsModule } from './products/products.module';
+import { CommentsModule } from './comments/comments.module';
 
 @Module({
   imports: [
@@ -30,7 +28,7 @@ import { ProductsModule } from './products/products.module';
       inject: [ConfigService],
     }),
     PostsModule,
-    // CommentsModule,
+    CommentsModule,
     BookmarksModule,
     BookmarksModule,
     UsersModule,

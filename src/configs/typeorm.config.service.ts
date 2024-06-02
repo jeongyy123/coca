@@ -8,6 +8,7 @@ import { Post } from 'src/posts/posts.entity';
 import { Capsule } from 'src/products/capsules.entity';
 import { Machine } from 'src/products/machines.entity';
 import { User } from 'src/users/users.entity';
+import { Comment } from '../comments/comments.entity';
 
 @Injectable()
 export class TypeOrmConfigService implements TypeOrmOptionsFactory {
@@ -21,7 +22,16 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       username: this.configService.get<string>('DATABASE_USERNAME'),
       password: this.configService.get<string>('DATABASE_PASSWORD'),
       database: this.configService.get<string>('DATABASE_NAME'),
-      entities: [Category, Bookmark, User, Order, Post, Machine, Capsule],
+      entities: [
+        Category,
+        Bookmark,
+        User,
+        Order,
+        Post,
+        Machine,
+        Capsule,
+        Comment,
+      ],
       schema: 'coca',
       synchronize: this.configService.get<boolean>('DATABASE_SYNCHRONIZE'),
     };

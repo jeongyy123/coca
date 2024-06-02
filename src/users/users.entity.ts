@@ -1,5 +1,6 @@
 import { Bookmark } from 'src/bookmarks/bookmarks.entity';
 import { Post } from 'src/posts/posts.entity';
+import { Comment } from 'src/comments/comments.entity';
 import {
   Column,
   CreateDateColumn,
@@ -40,5 +41,8 @@ export class User {
   //post 관계
   @OneToMany(() => Post, (post) => post.user)
   posts: Post[];
+
   //comment 관계
+  @OneToMany(() => Comment, (comment) => comment.user)
+  comments: Comment[];
 }

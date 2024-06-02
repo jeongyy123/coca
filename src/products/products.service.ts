@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { MachinesRepository } from './machines.repository';
 import { CapsulesRepository } from './capsules.repository';
 
@@ -14,9 +14,13 @@ export class ProductsService {
   }
 
   async getMachineById(machineId: number) {
-    return await this.machinesRepository.findOne({
+    const machine = await this.machinesRepository.findOne({
       where: { machineId, deletedAt: null },
+      select: ['machineName', 'machineImgUrl', 'machineAmount'],
     });
+    if (!machine) throw new NotFoundException(`해당 상품은 존재하지 않습니다.`);
+
+    return machine;
   }
 
   async getCapsules() {
@@ -24,8 +28,13 @@ export class ProductsService {
   }
 
   async getCapsuleById(capsuleId: number) {
-    return await this.capsulesRepository.findOne({
+    const capsule = await this.capsulesRepository.findOne({
       where: { capsuleId, deletedAt: null },
+      select: ['capsuleName', 'capsuleImgUrl', 'capsuleAmount'],
     });
+
+    if (!capsule) throw new NotFoundException(`해당 상품은 존재하지 않습니다.`);
+
+    return capsule;
   }
 }

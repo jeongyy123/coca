@@ -1,6 +1,7 @@
 import { Bookmark } from 'src/bookmarks/bookmarks.entity';
 import { Order } from 'src/orders/orders.entity';
 import { User } from 'src/users/users.entity';
+import { Comment } from 'src/comments/comments.entity';
 import {
   Column,
   CreateDateColumn,
@@ -59,4 +60,8 @@ export class Post {
   //order 관계
   @OneToMany(() => Order, (order) => order.post)
   orders: Order[];
+
+  //comment 관계
+  @OneToMany(() => Comment, (comment) => comment.post)
+  comments: Comment[];
 }
