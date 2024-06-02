@@ -3,11 +3,16 @@ import puppeteer from 'puppeteer';
 import cheerio from 'cheerio';
 import { MachinesRepository } from 'src/products/machines.repository';
 import { CapsulesRepository } from 'src/products/capsules.repository';
+import { Machine } from 'src/products/machines.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Capsule } from 'src/products/capsules.entity';
 
 @Injectable()
 export class CrawlerService {
   constructor(
+    @InjectRepository(Machine)
     private machinesRepository: MachinesRepository,
+    @InjectRepository(Capsule)
     private capsulesRepository: CapsulesRepository,
   ) {}
 

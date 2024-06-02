@@ -5,12 +5,18 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { UsersRepository } from './users.repository';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from './users.entity';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly usersRepository: UsersRepository) {}
+  constructor(
+    @InjectRepository(User)
+    private readonly usersRepository: UsersRepository,
+  ) {}
 
   // 일반 회원가입
+  // 추가 조건: 닉네임 중복검사하기
   async signup(email: string, password: string, nickname: string) {
     const checkUser = this.usersRepository.findOne({
       where: { email, deletedAt: null },

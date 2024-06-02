@@ -13,6 +13,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { JwtConfigService } from './configs/jwt.config.service';
 import { ProductsModule } from './products/products.module';
 import { CommentsModule } from './comments/comments.module';
+import { ProfilesModule } from './profiles/profiles.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { CommentsModule } from './comments/comments.module';
     OrdersModule,
     CrawlerModule,
     ProductsModule,
+    ProfilesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
