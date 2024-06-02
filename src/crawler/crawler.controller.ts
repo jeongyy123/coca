@@ -5,8 +5,13 @@ import { CrawlerService } from './crawler.service';
 export class CrawlerController {
   constructor(private readonly crawlerService: CrawlerService) {}
 
-  @Get()
-  async crawl(@Query('url') url: string) {
-    return this.crawlerService.scrape(url);
+  @Get('/machines')
+  async scrapeMachines(@Query('url') url: string) {
+    return this.crawlerService.scrapeMachines(url);
+  }
+
+  @Get('/capsules')
+  async scrapeCapsules(@Query('url') url: string) {
+    return this.crawlerService.scrapeCapsules(url);
   }
 }

@@ -19,10 +19,7 @@ export class Capsule {
   capsuleImgUrl: string;
 
   @Column()
-  capsuleQuantity: number;
-
-  @Column()
-  capsuleAmount: number;
+  capsuleAmount: string;
 
   @CreateDateColumn()
   createdAt: Date;
