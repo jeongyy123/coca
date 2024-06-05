@@ -1,19 +1,25 @@
-import { Module } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { PostsModule } from './posts/posts.module';
-import { CrawlerModule } from './crawler/crawler.module';
-import { OrdersModule } from './orders/orders.module';
-import { UsersModule } from './users/users.module';
-import { BookmarksModule } from './bookmarks/bookmarks.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TypeOrmConfigService } from './configs/typeorm.config.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtConfigService } from './configs/jwt.config.service';
-import { ProductsModule } from './products/products.module';
-import { CommentsModule } from './comments/comments.module';
-import { ProfilesModule } from './profiles/profiles.module';
+import { ProductsModule } from './modules/products/products.module';
+import { CommentsModule } from './modules/comments/comments.module';
+import { ProfilesModule } from './modules/profiles/profiles.module';
+import { AuthMiddleware } from './modules/auth/auth.middleware';
+import { TypeOrmConfigService } from './configs/typeorm.config.service';
+import { PostsModule } from './modules/posts/posts.module';
+import { BookmarksModule } from './modules/bookmarks/bookmarks.module';
+import { UsersModule } from './modules/users/users.module';
+import { OrdersModule } from './modules/orders/orders.module';
+import { CrawlerModule } from './modules/crawler/crawler.module';
 
 @Module({
   imports: [
@@ -31,7 +37,6 @@ import { ProfilesModule } from './profiles/profiles.module';
     PostsModule,
     CommentsModule,
     BookmarksModule,
-    BookmarksModule,
     UsersModule,
     OrdersModule,
     CrawlerModule,
@@ -41,22 +46,65 @@ import { ProfilesModule } from './profiles/profiles.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
-// export class AppModule implements NestModule {
-//   configure(consumer: MiddlewareConsumer) {
-//     consumer
-//       .apply(AuthMiddleware)
-//       .forRoutes(
-//         { path: 'category', method: RequestMethod.POST },
-//         { path: 'category/:categoryId', method: RequestMethod.PATCH },
-//         { path: 'category/:categoryId', method: RequestMethod.DELETE },
-//         { path: 'menu/:categoryId', method: RequestMethod.POST },
-//         { path: 'menu/:categoryId/:menuId', method: RequestMethod.PATCH },
-//         { path: 'menu/:categoryId/:menuId', method: RequestMethod.DELETE },
-//         { path: 'order', method: RequestMethod.POST },
-//         { path: 'order/customer', method: RequestMethod.GET },
-//         { path: 'order/owner', method: RequestMethod.GET },
-//         { path: 'order/:orderId/status', method: RequestMethod.PATCH },
-//       );
-//   }
-// }
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(AuthMiddleware).forRoutes(
+      {
+        path: 'users/self/edit',
+        method: RequestMethod.PATCH,
+      },
+      {
+        path: '/users/profile/self',
+        method: RequestMethod.GET,
+      },
+      {
+        path: '/users/profile/self/posts',
+        method: RequestMethod.GET,
+      },
+      {
+        path: '/users/profile/self/comments',
+        method: RequestMethod.GET,
+      },
+      {
+        path: '/users/profile/self/bookmarks',
+        method: RequestMethod.GET,
+      },
+      {
+        path: '/posts',
+        method: RequestMethod.POST,
+      },
+      {
+        path: '/posts/:postId',
+        method: RequestMethod.PATCH,
+      },
+      {
+        path: '/posts/:postId/orders',
+        method: RequestMethod.POST,
+      },
+      {
+        path: '/posts/myposts/orders',
+        method: RequestMethod.GET,
+      },
+      {
+        path: '/posts/:postId/comments',
+        method: RequestMethod.POST,
+      },
+      {
+        path: '/posts/:postId/comments/:commentId',
+        method: RequestMethod.PATCH,
+      },
+      {
+        path: '/posts/:postId/comments/:commentId',
+        method: RequestMethod.DELETE,
+      },
+      {
+        path: '/posts/:postId/bookmarks',
+        method: RequestMethod.POST,
+      },
+      {
+        path: '/posts/:postId/bookmarks',
+        method: RequestMethod.DELETE,
+      },
+    );
+  }
+}

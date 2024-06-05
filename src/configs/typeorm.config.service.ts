@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
-import { Bookmark } from 'src/bookmarks/bookmarks.entity';
-import { Category } from 'src/catagories/categories.entity';
-import { Order } from 'src/orders/orders.entity';
-import { Post } from 'src/posts/posts.entity';
-import { Capsule } from 'src/products/capsules.entity';
-import { Machine } from 'src/products/machines.entity';
-import { User } from 'src/users/users.entity';
-import { Comment } from '../comments/comments.entity';
+import { Bookmark } from 'src/modules/bookmarks/bookmarks.entity';
+import { Category } from 'src/modules/catagories/categories.entity';
+import { Order } from 'src/modules/orders/orders.entity';
+import { Post } from 'src/modules/posts/posts.entity';
+import { Capsule } from 'src/modules/products/capsules.entity';
+import { Machine } from 'src/modules/products/machines.entity';
+import { User } from 'src/modules/users/users.entity';
+import { Comment } from 'src/modules/comments/comments.entity';
 
 @Injectable()
 export class TypeOrmConfigService implements TypeOrmOptionsFactory {
