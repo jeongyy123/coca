@@ -22,11 +22,6 @@ export class Bookmark {
   user: User;
 
   //post 관계
-  @ManyToMany(() => Post, (post) => post.bookmarks)
-  @JoinTable({
-    name: 'post_bookmark', // 조인 테이블 이름
-    joinColumn: { name: 'bookmarkId', referencedColumnName: 'bookmarkId' },
-    inverseJoinColumn: { name: 'postId', referencedColumnName: 'postId' },
-  })
-  posts: Post[];
+  @ManyToOne(() => Post, (post) => post.bookmarks)
+  post: Post;
 }

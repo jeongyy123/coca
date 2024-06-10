@@ -54,8 +54,8 @@ export class Post {
   user: User;
 
   //bookmark 관계
-  @ManyToMany(() => Bookmark, (bookmark) => bookmark.posts)
-  bookmarks: Bookmark;
+  @OneToMany(() => Bookmark, (bookmark) => bookmark.post)
+  bookmarks: Bookmark[];
 
   //order 관계
   @OneToMany(() => Order, (order) => order.post)
